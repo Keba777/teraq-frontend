@@ -81,4 +81,4 @@ The application will be running at [http://localhost:3000](http://localhost:3000
 - **SEO Ready**: Proper metadata handling and semantic HTML5 for search engine visibility.
 
 ---
-Built with ❤️ by the terraQ Team.
+
