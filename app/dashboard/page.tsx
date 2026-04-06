@@ -10,8 +10,18 @@ import {
   ExternalLink,
   QrCode
 } from "lucide-react";
+import { useQueueEvents } from "@/hooks/use-queue-events";
+import { useState, useCallback } from "react";
 
 export default function DashboardPage() {
+  const [queueId, setQueueId] = useState<string | undefined>("some-queue-uuid"); 
+  
+  const handleQueueEvent = useCallback((event: any) => {
+    console.log("Real-time event received in Dashboard:", event);
+  }, []);
+
+  useQueueEvents(queueId, handleQueueEvent);
+
   return (
     <div className="space-y-10 max-w-7xl mx-auto">
       {/* Session Status Header */}

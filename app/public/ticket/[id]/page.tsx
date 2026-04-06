@@ -9,15 +9,23 @@ import {
   Share2
 } from "lucide-react";
 import Link from "next/link";
+import { useState, useCallback } from "react";
+import { useQueueEvents } from "@/hooks/use-queue-events";
 
 export default function TicketStatusPage({ params }: { params: { id: string } }) {
-  // Mock data for UI demo
-  const ticket = {
-    number: "045",
-    status: "waiting", // waiting, called, served
-    ahead: 2,
-    nowServing: "042"
-  };
+  const [queueId, setQueueId] = useState<string | undefined>("some-queue-uuid"); // Fetched from ticket data
+  const [ticketStatus, setTicketStatus] = useState("waiting");
+
+  const handleQueueEvent = useCallback((event: any) => {
+    if (event.type === "TicketCalled" && event.data.ticket_id === params.id) {
+       setTicketStatus("called");
+    }
+    if (event.type === "TicketUpdated" && event.data.ticket_id === params.id) {
+       setTicketStatus(event.data.status);
+    }
+  }, [params.id]);
+
+  useQueueEvents(queueId, handleQueueEvent);
 
   return (
     <main className="min-h-screen bg-background p-6 flex flex-col items-center justify-center font-sans tracking-tight">
@@ -45,30 +53,30 @@ export default function TicketStatusPage({ params }: { params: { id: string } })
           {/* Status Badge */}
           <div className="flex justify-center">
             <div className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] flex items-center gap-2 ${
-              ticket.status === 'called' 
+              ticketStatus === 'called' 
               ? "bg-tertiary text-black animate-bounce" 
               : "bg-surface-high text-foreground/40"
             }`}>
-              <div className={`w-1.5 h-1.5 rounded-full ${ticket.status === 'called' ? 'bg-black' : 'bg-primary'}`} />
-              {ticket.status === 'called' ? "Proceed Now" : "Currently Waiting"}
+              <div className={`w-1.5 h-1.5 rounded-full ${ticketStatus === 'called' ? 'bg-black' : 'bg-primary'}`} />
+              {ticketStatus === 'called' ? "Proceed Now" : "Currently Waiting"}
             </div>
           </div>
 
           <div className="space-y-2">
             <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-foreground/20">Your Ticket</p>
             <h1 className="text-[10rem] font-display font-bold leading-none tracking-tighter text-foreground drop-shadow-glow">
-              {ticket.number}
+              045
             </h1>
           </div>
 
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-surface-low/50 p-6 rounded-3xl space-y-1">
               <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">People Ahead</p>
-              <p className="text-3xl font-display font-bold text-primary">{ticket.ahead}</p>
+              <p className="text-3xl font-display font-bold text-primary">2</p>
             </div>
             <div className="bg-surface-low/50 p-6 rounded-3xl space-y-1">
               <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">Now Serving</p>
-              <p className="text-3xl font-display font-bold text-tertiary">{ticket.nowServing}</p>
+              <p className="text-3xl font-display font-bold text-tertiary">042</p>
             </div>
           </div>
 
