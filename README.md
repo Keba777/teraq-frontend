@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ቴራQ (terraQ) Frontend
 
-## Getting Started
+A modern, responsive, and performance-oriented web application for managing and tracking queues in real-time. Built with **Next.js 16+** and **Tailwind CSS 4**.
 
-First, run the development server:
+## 🌟 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**ቴራQ** (terraQ) provides a streamlined user experience for both business owners and customers. Business owners can create and manage queues, while customers can join and track their live position in real-time, all in a beautiful, accessible interface.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Technology Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **Framework**: [Next.js 16+](https://nextjs.org/) (App Router)
+*   **Aesthetics**: [Tailwind CSS 4](https://tailwindcss.com/)
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/)
+*   **Icons**: [Lucide React](https://lucide.dev/)
+*   **Real-time Interaction**: Server-Sent Events (SSE) via the browser's [EventSource API](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+*   **Utility**: [qrcode.react](https://github.com/zpao/qrcode.react) for easy mobile queue joining.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚦 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+*   [Node.js](https://nodejs.org/) (v20+ recommended)
+*   [pnpm](https://pnpm.io/) or [npm](https://docs.npmjs.com/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Local Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/Keba777/teraq-frontend.git
+    cd frontend
+    ```
 
-## Deploy on Vercel
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3.  **Configure `.env`**:
+    Create a `.env` file in the root directory and point it to your backend API:
+    ```bash
+    NEXT_PUBLIC_API_URL=http://localhost:7000
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4.  **Run the application**:
+    ```bash
+    npm run dev
+    ```
+
+The application will be running at [http://localhost:3000](http://localhost:3000).
+
+## ✨ Core Features
+
+### 📅 Live Queue Tracking
+- Real-time updates of current ticket being served.
+- Live "ahead-count" for customers to know their exact position in line.
+- Automatic page state updates via SSE from the backend.
+
+### 🏢 Business Management
+- Dashboard to create and manage multiple businesses.
+- Real-time queue session controls (start/next/skip/served).
+- Automatic QR code generation for every queue.
+
+### 📱 Responsive & Premium Design
+- **Mobile First**: Optimized for handheld devices, perfect for customers "on-the-move".
+- **Dark Mode**: Support for light and dark themes via `next-themes`.
+- **Micro-animations**: Smooth transitions and hover effects for a premium feel.
+
+## 🏗️ Folder Structure
+
+*   **/app**: Next.js App Router pages and layouts.
+*   **/components**: Reusable UI components (buttons, cards, etc.).
+*   **/features**: Feature-specific logic (Auth, Businesses, Queues, Tickets).
+*   **/hooks**: Custom React hooks for data fetching and real-time events.
+*   **/lib**: Shared utilities and API client configuration.
+*   **/styles**: Global styles and Tailwind configuration.
+
+## 🛡️ Best Practices
+
+- **Atomic Design**: Reusable components structured for maximum flexibility.
+- **Type Safety**: Fully typed with TypeScript for reliable development.
+- **SEO Ready**: Proper metadata handling and semantic HTML5 for search engine visibility.
+
+---
+Built with ❤️ by the terraQ Team.
